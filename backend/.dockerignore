@@ -1,0 +1,18 @@
+# Never ship local environments, secrets or build artefacts in the image.
+venv/
+.venv/
+.env
+.env.*
+!.env.example
+**/__pycache__/
+*.py[cod]
+staticfiles/
+media/
+*.log
+*.sqlite3
+.pytest_cache/
+.coverage
+htmlcov/
+.git
+Dockerfile
+.dockerignore

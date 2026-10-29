@@ -1,0 +1,77 @@
+# Production-style stack: nginx (SPA + reverse proxy) → Gunicorn/Django → PostgreSQL.
+#
+#   cp .env.example .env && cp backend/.env.example backend/.env   # then edit both
+#   docker compose up -d --build
+#
+# See DEPLOYMENT.md for TLS, backups and the go-live checklist.
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:?set DB_NAME in .env}
+      POSTGRES_USER: ${DB_USER:?set DB_USER in .env}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    # No published port: the database is reachable only inside this network.
+    logging: *default-logging
+
+  # One-shot: applies migrations and seeds reference data, then exits.
+  # Keeping this out of the web container means scaled replicas never race.
+  migrate:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DB_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py createcachetable"
+    restart: "no"
+    logging: *default-logging
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    environment:
+      DB_HOST: db
+      NUM_PROXIES: "1"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    expose:
+      - "8000"
+    logging: *default-logging
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    logging: *default-logging
+
+volumes:
+  postgres_data:

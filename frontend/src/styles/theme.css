@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLOWENGINE — DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand palette ─────────────────────────────────────────────────────── */
+  --brand-50:  #eef2ff;
+  --brand-100: #e0e7ff;
+  --brand-200: #c7d2fe;
+  --brand-500: #6366f1;
+  --brand-600: #4f46e5;
+  --brand-700: #4338ca;
+  --brand-800: #3730a3;
+
+  /* ── Neutrals ──────────────────────────────────────────────────────────── */
+  --neutral-0:   #ffffff;
+  --neutral-50:  #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+
+  /* ── Semantic aliases ──────────────────────────────────────────────────── */
+  --bg:          var(--neutral-50);
+  --panel:       var(--neutral-0);
+  --line:        var(--neutral-200);
+  --text:        var(--neutral-900);
+  --text-muted:  var(--neutral-500);
+  --text-subtle: var(--neutral-400);
+  --primary:     var(--brand-600);
+  --primary-hover: var(--brand-700);
+  --primary-light: var(--brand-50);
+
+  /* ── Sidebar ───────────────────────────────────────────────────────────── */
+  --sidebar-bg:       #0f172a;
+  --sidebar-border:   rgba(255,255,255,0.06);
+  --sidebar-text:     #94a3b8;
+  --sidebar-text-active: #f1f5f9;
+  --sidebar-active-bg: rgba(99,102,241,0.18);
+  --sidebar-active-border: var(--brand-500);
+  --sidebar-hover-bg: rgba(255,255,255,0.05);
+  --sidebar-width:    256px;
+
+  /* ── Status colours ────────────────────────────────────────────────────── */
+  --success-bg:   #f0fdf4;
+  --success-text: #15803d;
+  --success-border: #bbf7d0;
+  --error-bg:     #fef2f2;
+  --error-text:   #b91c1c;
+  --error-border: #fecaca;
+  --warning-bg:   #fffbeb;
+  --warning-text: #b45309;
+  --warning-border: #fde68a;
+  --info-bg:      #eff6ff;
+  --info-text:    #1d4ed8;
+  --info-border:  #bfdbfe;
+
+  /* ── KPI card accents ──────────────────────────────────────────────────── */
+  --kpi-blue:   #2563eb;
+  --kpi-green:  #16a34a;
+  --kpi-amber:  #d97706;
+  --kpi-purple: #7c3aed;
+  --kpi-teal:   #0d9488;
+  --kpi-rose:   #e11d48;
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 14px;
+  --text-md:   15px;
+  --text-lg:   17px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  30px;
+
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ── Spacing ───────────────────────────────────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  28px;
+  --space-8:  32px;
+  --space-10: 40px;
+
+  /* ── Radii ─────────────────────────────────────────────────────────────── */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  18px;
+  --radius-2xl: 24px;
+
+  /* ── Shadows ───────────────────────────────────────────────────────────── */
+  --shadow-xs: 0 1px 2px rgba(15,23,42,0.06);
+  --shadow-sm: 0 2px 8px rgba(15,23,42,0.08);
+  --shadow-md: 0 4px 16px rgba(15,23,42,0.10);
+  --shadow-lg: 0 8px 32px rgba(15,23,42,0.12);
+
+  /* ── Transitions ───────────────────────────────────────────────────────── */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+}
